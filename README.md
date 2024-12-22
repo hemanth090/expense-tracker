@@ -1,150 +1,118 @@
-# Modern Expense Tracker Pro
+# Expense Tracker Pro
 
-A modern, full-stack expense tracking application built with React and Supabase, featuring user authentication, real-time updates, and advanced analytics.
+A modern, full-stack expense tracking application built with React and Supabase. Track your expenses, analyze spending patterns, and manage your finances with ease.
 
 ## 🌟 Features
 
 - **User Authentication**
-  - Secure Sign up/Sign in with email
+  - Secure email/password authentication
   - Password reset functionality
-  - Protected routes and authenticated sessions
+  - Protected routes for authenticated users
 
 - **Expense Management**
   - Add, edit, and delete expenses
-  - Categorize expenses with custom categories
-  - Attach notes and dates to expenses
-  - Real-time updates across devices
+  - Categorize expenses
+  - Add notes and dates to expenses
+  - Real-time updates
 
-- **Analytics & Visualization**
-  - Visual expense breakdown by category
+- **Analytics & Insights**
+  - Visual breakdown of expenses by category
   - Monthly spending trends
   - Interactive charts and graphs
-  - Category-wise analysis
+  - Expense summaries
 
-- **UI/UX**
-  - Modern, responsive Material-UI design
-  - Dark/Light theme support
-  - Mobile-friendly interface
+- **Modern UI/UX**
+  - Responsive design for all devices
+  - Dark/Light mode support
+  - Material-UI components
   - Smooth animations and transitions
 
-## 🚀 Live Demo
+## 🚀 Tech Stack
 
-Visit the live application: [Expense Tracker Pro](https://expense-tracker-pro.vercel.app)
-
-## 🛠️ Tech Stack
-
-- **Frontend:**
+- **Frontend**
   - React 18
-  - Material-UI (MUI) for components
-  - React Router for navigation
+  - Material-UI v5
+  - React Router v6
   - Recharts for data visualization
   - Context API for state management
 
-- **Backend & Database:**
-  - Supabase for backend services
-  - PostgreSQL with Row Level Security
+- **Backend**
+  - Supabase
+  - PostgreSQL with RLS
   - Real-time subscriptions
   - Secure authentication
 
-## 📦 Installation & Setup
+## 🛠️ Installation
 
-1. **Clone the Repository**
+1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/expense-tracker-pro.git
-   cd expense-tracker-pro
+   git clone https://github.com/hemanth090/expense-tracker.git
+   cd expense-tracker
    ```
 
-2. **Supabase Setup**
-   - Create a project at [Supabase](https://supabase.com)
-   - Run SQL commands from `supabase/init.sql`
-   - Copy project URL and anon key from Project Settings > API
-
-3. **Frontend Setup**
+2. Install frontend dependencies:
    ```bash
    cd frontend
    npm install
    ```
 
-4. **Environment Configuration**
-   Create `.env` file in the frontend directory:
+3. Set up environment variables:
+   Create a `.env` file in the frontend directory with:
    ```env
-   REACT_APP_SUPABASE_URL=your-project-url
-   REACT_APP_SUPABASE_ANON_KEY=your-anon-key
+   REACT_APP_SUPABASE_URL=your_supabase_url
+   REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
    ```
 
-5. **Start Development Server**
+4. Start the development server:
    ```bash
    npm start
    ```
 
+## 🔐 Security
+
+- Implements Row Level Security (RLS) in Supabase
+- Secure authentication flow
+- Protected API endpoints
+- Environment variables for sensitive data
+
+## 🌐 Deployment
+
+The application is deployed on Vercel. Visit the live demo at: [Expense Tracker Pro](https://expense-tracker-pro.vercel.app)
+
 ## 📁 Project Structure
 
 ```
-expense-tracker-pro/
+expense-tracker/
 ├── frontend/
 │   ├── public/
 │   └── src/
 │       ├── components/
-│       │   ├── Auth/
-│       │   ├── Dashboard/
-│       │   ├── Expenses/
-│       │   └── Charts/
 │       ├── context/
-│       │   ├── AuthContext.js
-│       │   └── ExpenseContext.js
 │       ├── hooks/
 │       ├── utils/
 │       └── App.js
-├── supabase/
-│   └── init.sql
-└── README.md
+└── supabase/
+    ├── functions.sql
+    ├── init.sql
+    └── email_template.sql
 ```
-
-## 🔒 Security Features
-
-- Row Level Security (RLS) for data protection
-- Secure environment variable management
-- Protected API endpoints
-- SQL injection prevention
-- XSS protection
-
-## 🚀 Deployment
-
-The application is deployed on Vercel:
-
-1. Push your code to GitHub
-2. Connect your repository to Vercel
-3. Configure environment variables
-4. Deploy!
-
-## 📱 Progressive Web App (PWA)
-
-- Installable on mobile devices
-- Offline functionality
-- Push notifications support
-- Fast loading and performance
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📄 License
+## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is open source and available under the [MIT License](LICENSE).
 
-## 🙏 Acknowledgments
+## 👥 Contact
 
-- Material-UI for the beautiful components
-- Supabase for the amazing backend service
-- React community for the excellent tools
-- All contributors who helped improve the project
+- GitHub: [@hemanth090](https://github.com/hemanth090)
 
 ---
 
 Made with ❤️ by Hemanth
-
-For support, email: naveenhemanth4@gmail.com
