@@ -42,6 +42,10 @@ A modern, full-stack expense tracking application built with React and Supabase.
   - Real-time subscriptions
   - Secure authentication
 
+## 🌐 Live Demo
+
+Check out the live application: [Expense Tracker Pro](https://frontend-delta-plum-91.vercel.app/auth)
+
 ## 🛠️ Installation
 
 1. Clone the repository:
@@ -74,10 +78,6 @@ A modern, full-stack expense tracking application built with React and Supabase.
 - Secure authentication flow
 - Protected API endpoints
 - Environment variables for sensitive data
-
-## 🌐 Deployment
-
-The application is deployed on Vercel. Visit the live demo at: [Expense Tracker Pro](https://expense-tracker-pro.vercel.app)
 
 ## 📁 Project Structure
 
