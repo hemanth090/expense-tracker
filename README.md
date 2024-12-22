@@ -42,7 +42,7 @@ A modern, full-stack expense tracking application built with React and Supabase.
   - Real-time subscriptions
   - Secure authentication
 
-## 🌐 Live Demo
+## 🌐 Live 
 
 Check out the live application: [Expense Tracker ](https://frontend-delta-plum-91.vercel.app/auth)
 
