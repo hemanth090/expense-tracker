@@ -1,11 +1,23 @@
 import { useState, useEffect } from 'react';
 import { useExpense } from '../context/ExpenseContext';
-import { format, startOfWeek } from 'date-fns';
-import { 
-  predictNextMonth, 
-  generatePredictionData, 
-  analyzeSpendingPatterns 
-} from '../utils/predictiveUtils';
+
+const formatDate = (date) => {
+  const d = new Date(date);
+  return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+};
+
+const formatMonthYear = (date) => {
+  const d = new Date(date);
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  return `${months[d.getMonth()]} ${d.getFullYear()}`;
+};
+
+const getStartOfWeek = (date) => {
+  const d = new Date(date);
+  const day = d.getDay();
+  const diff = d.getDate() - day;
+  return new Date(d.setDate(diff));
+};
 
 const useAnalytics = (dateRange, categoryFilter, timeFrame) => {
   const { expenses } = useExpense();
@@ -36,19 +48,19 @@ const useAnalytics = (dateRange, categoryFilter, timeFrame) => {
 
         switch (timeFrame) {
           case 'daily':
-            key = format(date, 'MM/dd/yyyy');
+            key = formatDate(date);
             break;
           case 'weekly':
-            key = format(startOfWeek(date), 'MM/dd/yyyy');
+            key = formatDate(getStartOfWeek(date));
             break;
           case 'monthly':
-            key = format(date, 'MMM yyyy');
+            key = formatMonthYear(date);
             break;
           case 'yearly':
-            key = format(date, 'yyyy');
+            key = date.getFullYear().toString();
             break;
           default:
-            key = format(date, 'MM/dd/yyyy');
+            key = formatDate(date);
         }
 
         const current = timeFrameMap.get(key) || 0;
@@ -59,14 +71,6 @@ const useAnalytics = (dateRange, categoryFilter, timeFrame) => {
         .sort((a, b) => new Date(a.date) - new Date(b.date));
 
       setMonthlyData(timeFrameTrends);
-
-      // Generate prediction data
-      const predictionResult = generatePredictionData(timeFrameTrends);
-      setPredictionData(predictionResult);
-      setNextMonthPrediction(predictNextMonth(timeFrameTrends));
-
-      // Analyze spending patterns
-      setSpendingPatterns(analyzeSpendingPatterns(filteredExpenses));
 
       // Process category data
       const categoryMap = new Map();
@@ -109,7 +113,7 @@ const useAnalytics = (dateRange, categoryFilter, timeFrame) => {
       // Process daily data
       const dailyMap = new Map();
       filteredExpenses.forEach(expense => {
-        const date = format(new Date(expense.date), 'MM/dd/yyyy');
+        const date = formatDate(expense.date);
         const current = dailyMap.get(date) || 0;
         dailyMap.set(date, current + expense.amount);
       });

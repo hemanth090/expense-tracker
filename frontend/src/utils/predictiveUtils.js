@@ -1,4 +1,8 @@
-import { format, addMonths } from 'date-fns';
+const formatMonthYear = (date) => {
+  const d = new Date(date);
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  return `${months[d.getMonth()]} ${d.getFullYear()}`;
+};
 
 // Simple linear regression for trend analysis
 export const calculateTrend = (data) => {
@@ -48,9 +52,11 @@ export const generatePredictionData = (historicalData, months = 3) => {
   // Add predictions for future months
   const lastDate = new Date(historicalData[historicalData.length - 1].date);
   for (let i = 0; i < months; i++) {
-    const nextDate = addMonths(lastDate, i + 1);
+    const nextDate = new Date(lastDate);
+    nextDate.setMonth(nextDate.getMonth() + i + 1);
+    
     result.push({
-      date: format(nextDate, 'MMM yyyy'),
+      date: formatMonthYear(nextDate),
       actual: null,
       predicted: intercept + slope * (historicalData.length + i)
     });
@@ -69,10 +75,11 @@ export const analyzeSpendingPatterns = (expenses) => {
   };
 
   const dailyTotals = new Map();
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   
   expenses.forEach(expense => {
     const date = new Date(expense.date);
-    const day = format(date, 'EEEE'); // Full day name
+    const day = days[date.getDay()];
     const current = dailyTotals.get(day) || 0;
     dailyTotals.set(day, current + expense.amount);
   });
