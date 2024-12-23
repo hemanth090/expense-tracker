@@ -16,6 +16,7 @@ import ExpenseList from './components/ExpenseList';
 import ExpenseSummary from './components/ExpenseSummary';
 import ResetPassword from './components/ResetPassword';
 import ProtectedRoute from './components/ProtectedRoute';
+import AnalyticsDashboard from './components/analytics/AnalyticsDashboard';
 import { supabase } from './supabaseClient';
 
 const ThemedApp = () => {
@@ -33,41 +34,34 @@ const ThemedApp = () => {
                 minHeight: '100vh',
                 bgcolor: 'background.default',
                 color: 'text.primary',
-                display: 'flex',
-                flexDirection: 'column',
               }}
             >
               <Header />
-              <Box
-                component="main"
-                sx={{
-                  flex: 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  py: 3,
-                }}
-              >
-                <Container maxWidth="lg">
-                  <Routes>
-                    <Route path="/auth" element={<Auth />} />
-                    <Route path="/reset-password" element={<ResetPassword />} />
-                    <Route
-                      path="/expenses"
-                      element={
-                        <ProtectedRoute>
-                          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-                            <ExpenseForm />
-                            <ExpenseSummary />
-                            <ExpenseList />
-                          </Box>
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route path="/" element={<Navigate to="/expenses" replace />} />
-                    <Route path="*" element={<Navigate to="/expenses" replace />} />
-                  </Routes>
-                </Container>
-              </Box>
+              <Routes>
+                <Route path="/auth" element={<Auth />} />
+                <Route path="/reset-password" element={<ResetPassword />} />
+                <Route
+                  path="/"
+                  element={
+                    <ProtectedRoute>
+                      <Box sx={{ p: 3 }}>
+                        <ExpenseForm />
+                        <ExpenseSummary />
+                        <ExpenseList />
+                      </Box>
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/analytics"
+                  element={
+                    <ProtectedRoute>
+                      <AnalyticsDashboard />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
             </Box>
           </ExpenseProvider>
         </AuthProvider>

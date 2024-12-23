@@ -14,16 +14,20 @@ import {
   Brightness4 as DarkIcon,
   Brightness7 as LightIcon,
   LogoutOutlined as LogoutIcon,
+  BarChart as BarChartIcon,
 } from '@mui/icons-material';
 import { useTheme as useCustomTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import { useSnackbar } from '../context/SnackbarContext';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const theme = useTheme();
   const { toggleTheme } = useCustomTheme();
   const { user, signOut } = useAuth();
   const { showSnackbar } = useSnackbar();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = async () => {
     try {
@@ -56,6 +60,18 @@ const Header = () => {
         >
           Expense Tracker
         </Typography>
+
+        {location.pathname !== '/auth' && location.pathname !== '/reset-password' && (
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Button
+              color="inherit"
+              startIcon={<BarChartIcon />}
+              onClick={() => navigate('/analytics')}
+            >
+              Analytics
+            </Button>
+          </Box>
+        )}
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <Tooltip title={`Switch to ${theme.palette.mode === 'dark' ? 'light' : 'dark'} mode`}>
