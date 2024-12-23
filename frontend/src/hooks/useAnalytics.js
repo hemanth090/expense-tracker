@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useExpense } from '../context/ExpenseContext';
-import { startOfWeek, endOfWeek, startOfMonth, endOfMonth, startOfYear, endOfYear } from 'date-fns';
+import { format, startOfWeek } from 'date-fns';
 import { 
   predictNextMonth, 
   generatePredictionData, 
@@ -36,19 +36,19 @@ const useAnalytics = (dateRange, categoryFilter, timeFrame) => {
 
         switch (timeFrame) {
           case 'daily':
-            key = date.toLocaleDateString();
+            key = format(date, 'MM/dd/yyyy');
             break;
           case 'weekly':
-            key = startOfWeek(date).toLocaleDateString();
+            key = format(startOfWeek(date), 'MM/dd/yyyy');
             break;
           case 'monthly':
-            key = `${date.toLocaleString('default', { month: 'short' })} ${date.getFullYear()}`;
+            key = format(date, 'MMM yyyy');
             break;
           case 'yearly':
-            key = date.getFullYear().toString();
+            key = format(date, 'yyyy');
             break;
           default:
-            key = date.toLocaleDateString();
+            key = format(date, 'MM/dd/yyyy');
         }
 
         const current = timeFrameMap.get(key) || 0;
@@ -109,7 +109,7 @@ const useAnalytics = (dateRange, categoryFilter, timeFrame) => {
       // Process daily data
       const dailyMap = new Map();
       filteredExpenses.forEach(expense => {
-        const date = new Date(expense.date).toLocaleDateString();
+        const date = format(new Date(expense.date), 'MM/dd/yyyy');
         const current = dailyMap.get(date) || 0;
         dailyMap.set(date, current + expense.amount);
       });

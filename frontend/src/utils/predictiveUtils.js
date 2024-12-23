@@ -1,3 +1,5 @@
+import { format, addMonths } from 'date-fns';
+
 // Simple linear regression for trend analysis
 export const calculateTrend = (data) => {
   const n = data.length;
@@ -44,12 +46,11 @@ export const generatePredictionData = (historicalData, months = 3) => {
   }));
 
   // Add predictions for future months
+  const lastDate = new Date(historicalData[historicalData.length - 1].date);
   for (let i = 0; i < months; i++) {
-    const nextDate = new Date(historicalData[historicalData.length - 1].date);
-    nextDate.setMonth(nextDate.getMonth() + i + 1);
-    
+    const nextDate = addMonths(lastDate, i + 1);
     result.push({
-      date: nextDate.toLocaleString('default', { month: 'short' }) + ' ' + nextDate.getFullYear(),
+      date: format(nextDate, 'MMM yyyy'),
       actual: null,
       predicted: intercept + slope * (historicalData.length + i)
     });
@@ -71,7 +72,7 @@ export const analyzeSpendingPatterns = (expenses) => {
   
   expenses.forEach(expense => {
     const date = new Date(expense.date);
-    const day = date.toLocaleDateString('en-US', { weekday: 'long' });
+    const day = format(date, 'EEEE'); // Full day name
     const current = dailyTotals.get(day) || 0;
     dailyTotals.set(day, current + expense.amount);
   });
