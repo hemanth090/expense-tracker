@@ -15,9 +15,11 @@ import {
   FileDownload as FileDownloadIcon,
   FilterList as FilterListIcon,
 } from '@mui/icons-material';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+
+const formatDateForInput = (date) => {
+  const d = new Date(date);
+  return d.toISOString().split('T')[0];
+};
 
 const AnalyticsFilters = ({
   dateRange,
@@ -37,25 +39,24 @@ const AnalyticsFilters = ({
         alignItems="center"
         sx={{ mb: 2 }}
       >
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DatePicker
-            label="Start Date"
-            value={dateRange.start}
-            onChange={(newValue) => {
-              setDateRange(prev => ({ ...prev, start: newValue }));
-            }}
-            renderInput={(params) => <TextField {...params} />}
-          />
-          <DatePicker
-            label="End Date"
-            value={dateRange.end}
-            onChange={(newValue) => {
-              setDateRange(prev => ({ ...prev, end: newValue }));
-            }}
-            renderInput={(params) => <TextField {...params} />}
-          />
-        </LocalizationProvider>
-
+        <TextField
+          label="Start Date"
+          type="date"
+          value={formatDateForInput(dateRange.start)}
+          onChange={(e) => {
+            setDateRange(prev => ({ ...prev, start: new Date(e.target.value) }));
+          }}
+          InputLabelProps={{ shrink: true }}
+        />
+        <TextField
+          label="End Date"
+          type="date"
+          value={formatDateForInput(dateRange.end)}
+          onChange={(e) => {
+            setDateRange(prev => ({ ...prev, end: new Date(e.target.value) }));
+          }}
+          InputLabelProps={{ shrink: true }}
+        />
         <FormControl sx={{ minWidth: 120 }}>
           <InputLabel>Time Frame</InputLabel>
           <Select
