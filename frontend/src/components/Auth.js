@@ -67,6 +67,7 @@ const FeatureCard = ({ icon: Icon, title, description }) => {
 const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [view, setView] = useState('sign-in');
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -88,6 +89,11 @@ const Auth = () => {
 
     try {
       if (view === 'sign-up') {
+        if (password !== confirmPassword) {
+          setErrors({ confirmPassword: 'Passwords do not match' });
+          setLoading(false);
+          return;
+        }
         const { error } = await signUp(email, password);
         if (error) throw error;
         setSnackbar({
@@ -280,6 +286,50 @@ const Auth = () => {
                     required
                     margin="normal"
                     autoComplete={view === 'sign-up' ? 'new-password' : 'current-password'}
+                    InputProps={{
+                      sx: {
+                        bgcolor: theme.palette.mode === 'dark' ? '#333' : '#fff',
+                        '&:hover': {
+                          bgcolor: theme.palette.mode === 'dark' ? '#404040' : '#fff',
+                        },
+                      },
+                    }}
+                    sx={{
+                      '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                          borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.23)' : 'rgba(0, 0, 0, 0.23)',
+                        },
+                        '&:hover fieldset': {
+                          borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.4)' : 'rgba(0, 0, 0, 0.4)',
+                        },
+                      },
+                      '& .MuiInputLabel-root': {
+                        color: theme.palette.text.secondary,
+                      },
+                      '& .MuiInputBase-input': {
+                        color: theme.palette.text.primary,
+                      },
+                    }}
+                  />
+                )}
+
+                {view === 'sign-up' && (
+                  <TextField
+                    fullWidth
+                    label="Confirm Password"
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                      if (errors.confirmPassword) {
+                        setErrors({ ...errors, confirmPassword: '' });
+                      }
+                    }}
+                    error={!!errors.confirmPassword}
+                    helperText={errors.confirmPassword}
+                    required
+                    margin="normal"
+                    autoComplete="new-password"
                     InputProps={{
                       sx: {
                         bgcolor: theme.palette.mode === 'dark' ? '#333' : '#fff',
