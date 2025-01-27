@@ -6,45 +6,51 @@ A modern, full-stack expense tracking application built with React and Supabase.
 
 - **User Authentication**
   - Secure email/password authentication
-  - Password reset functionality
+  - Password reset functionality with email notifications
   - Protected routes for authenticated users
+  - Persistent login state
 
 - **Expense Management**
   - Add, edit, and delete expenses
-  - Categorize expenses
-  - Add notes and dates to expenses
-  - Real-time updates
+  - Categorize expenses with customizable categories
+  - Add descriptions and dates to expenses
+  - Real-time updates using Supabase subscriptions
+  - Export expenses to Excel format
 
-- **Analytics & Insights**
-  - Visual breakdown of expenses by category
-  - Monthly spending trends
-  - Interactive charts and graphs
-  - Expense summaries
+- **Advanced Analytics & Insights**
+  - Visual breakdown of expenses by category with interactive pie charts
+  - Daily spending patterns with line chart visualization
+  - Monthly trends analysis with bar charts
+  - Period-over-period expense comparison
+  - Proper USD currency formatting throughout
+  - Interactive tooltips with detailed information
+  - Percentage breakdowns of spending categories
 
 - **Modern UI/UX**
-  - Responsive design for all devices
-  - Dark/Light mode support
-  - Material-UI components
-  - Smooth animations and transitions
+  - Responsive Material-UI design
+  - Dark/Light mode theme support
+  - Snackbar notifications for user feedback
+  - Smooth transitions and animations
+  - Mobile-friendly interface
 
 ## 🚀 Tech Stack
 
 - **Frontend**
-  - React 18
-  - Material-UI v5
-  - React Router v6
-  - Recharts for data visualization
-  - Context API for state management
+  - React 18 with Hooks and Context API
+  - Material-UI v5 for components and theming
+  - React Router v7 for navigation
+  - Recharts for interactive data visualization
+  - XLSX for Excel export functionality
 
-- **Backend**
-  - Supabase
-  - PostgreSQL with RLS
-  - Real-time subscriptions
-  - Secure authentication
+- **Backend & Database**
+  - Supabase for backend services
+  - PostgreSQL database with Row Level Security
+  - Real-time subscriptions for live updates
+  - Secure authentication and authorization
 
-## 🌐 Live 
+## 🌐 Live Demo
 
-Check out the live application: [Expense Tracker ](https://frontend-delta-plum-91.vercel.app/auth)
+Experience the application live: [Expense Tracker Pro](https://frontend-delta-plum-91.vercel.app/auth)
 
 ## 🛠️ Installation
 
@@ -72,12 +78,32 @@ Check out the live application: [Expense Tracker ](https://frontend-delta-plum-9
    npm start
    ```
 
-## 🔐 Security
+## 📊 Analytics Features
 
-- Implements Row Level Security (RLS) in Supabase
-- Secure authentication flow
+The analytics dashboard provides comprehensive insights into your spending:
+
+- **Category Breakdown**
+  - Interactive pie chart showing expense distribution
+  - Hover tooltips with exact amounts and percentages
+  - USD currency formatting
+
+- **Daily Spending**
+  - Line chart tracking daily expense patterns
+  - Easy-to-read tooltips with date and amount
+  - Trend analysis capabilities
+
+- **Monthly Trends**
+  - Bar chart visualization of monthly totals
+  - Period-over-period comparison
+  - Export functionality for detailed analysis
+
+## 🔐 Security Features
+
+- Row Level Security (RLS) in Supabase
+- Secure authentication flow with email verification
 - Protected API endpoints
 - Environment variables for sensitive data
+- Secure password reset functionality
 
 ## 📁 Project Structure
 
@@ -87,9 +113,15 @@ expense-tracker/
 │   ├── public/
 │   └── src/
 │       ├── components/
+│       │   ├── analytics/
+│       │   ├── layout/
+│       │   └── common/
 │       ├── context/
 │       ├── hooks/
 │       ├── utils/
+│       │   ├── formatters.js
+│       │   ├── exportUtils.js
+│       │   └── validation.js
 │       └── App.js
 └── supabase/
     ├── functions.sql
@@ -97,22 +129,26 @@ expense-tracker/
     └── email_template.sql
 ```
 
-## 🤝 Contributing
+## 🛡️ Environment Setup
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Required environment variables:
+- `REACT_APP_SUPABASE_URL`: Your Supabase project URL
+- `REACT_APP_SUPABASE_ANON_KEY`: Your Supabase anonymous key
+
+## 🔄 Updates and Versions
+
+- Latest version includes enhanced USD currency formatting
+- Improved chart visualizations and tooltips
+- Added export functionality for detailed analysis
+- Enhanced error handling and user feedback
+
+## 📫 Support
+
+For issues, feature requests, or contributions, please:
+1. Check existing issues or create a new one
+2. Fork the repository
+3. Create a pull request with your changes
 
 ## 📝 License
 
-This project is open source and available under the [MIT License](LICENSE).
-
-## 👥 Contact
-
-- GitHub: [@hemanth090](https://github.com/hemanth090)
-
----
-
-Made with ❤️ by Hemanth
+This project is licensed under the MIT License - see the LICENSE file for details.
