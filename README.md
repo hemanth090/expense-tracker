@@ -1,4 +1,4 @@
-# Expense Tracker Pro
+# Expense Tracker
 
 A modern, full-stack expense tracking application built with React and Supabase. Track your expenses, analyze spending patterns, and manage your finances with ease.
 
@@ -50,7 +50,7 @@ A modern, full-stack expense tracking application built with React and Supabase.
 
 ## 🌐 Live Demo
 
-Experience the application live: [Expense Tracker Pro](https://frontend-delta-plum-91.vercel.app/auth)
+Experience the application live: [Expense Tracker](https://frontend-delta-plum-91.vercel.app/auth)
 
 ## 🛠️ Installation
 
